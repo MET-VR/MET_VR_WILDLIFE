@@ -10,7 +10,7 @@ public class CabnetAnimations : MonoBehaviour
 
     void Start()
     {
-        Open();
+        //Open();
     }
 
     // Update is called once per frame
