@@ -4935,7 +4935,6 @@ GameObject:
   - component: {fileID: 770233793}
   - component: {fileID: 770233792}
   - component: {fileID: 770233791}
-  - component: {fileID: 770233795}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -5030,27 +5029,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &770233795
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770233790}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.8934642
-  m_Center: {x: -0.09343994, y: 0, z: 0.06700897}
 --- !u!1 &815933115
 GameObject:
   m_ObjectHideFlags: 0
