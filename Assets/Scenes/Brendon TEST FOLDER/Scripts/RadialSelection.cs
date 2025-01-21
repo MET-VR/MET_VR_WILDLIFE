@@ -97,7 +97,10 @@ public class RadialSelection : MonoBehaviour
     public void SpawnRadialPart()
 {
     // Calculate the position directly in front of the camera
-    Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.75f;
+    Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
+
+    // Lowers the spawn position of the radial menu
+    spawnPosition.y -= 0.1f;
 
     // Set the radial part canvas to the calculated position
     radialPartCanvas.position = spawnPosition;
