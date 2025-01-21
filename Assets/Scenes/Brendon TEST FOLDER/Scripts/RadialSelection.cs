@@ -14,16 +14,24 @@ public class RadialSelection : MonoBehaviour
     public GameObject radialPartPrefab;
     public Transform radialPartCanvas;
     public float angleBetweenParts = 10;
-    public Transform handTransform;
+    public Transform leftHandTransform; // The left hand (for activating and selecting)
+    public Transform rightHandTransform; // The right hand (to replace with the selected object)
+    public GameObject rightHandModel; // The default right hand model
 
     public UnityEvent<int> OnPartSelected;
 
     private List<GameObject> spawnedParts = new List<GameObject>();
-    private int currentHoveredRadialPart = -1; // Change to track hovered part
+    private int currentHoveredRadialPart = -1;
 
-    // Hex color code for the hover color
-    private string hoverColorHex = "#da5834"; // Your desired hover color
-    private Color hoverColor; // To store the converted color
+    private string hoverColorHex = "#da5834";
+    private Color hoverColor;
+
+    // List of objects to replace the right hand
+    public List<GameObject> handReplacementObjects;
+    private GameObject currentReplacementObject;
+
+    // Index for the "right hand" option in the radial menu
+    public int rightHandOptionIndex = -1; // Set this in the Inspector or code to the correct index
 
     void OnEnable()
     {
@@ -37,7 +45,6 @@ public class RadialSelection : MonoBehaviour
 
     void Start()
     {
-        // Convert the hex color code to a Color object
         hoverColor = HexToColor(hoverColorHex);
     }
 
@@ -45,27 +52,54 @@ public class RadialSelection : MonoBehaviour
     {
         if (spawnButton.action.WasPressedThisFrame())
         {
-            SpawnRadialPart();
+            ActivateRadialMenu();
         }
         if (spawnButton.action.IsPressed())
         {
-            GetHoveredRadialPart(); // Check for hovering instead of selection
+            GetHoveredRadialPart();
         }
         if (spawnButton.action.WasReleasedThisFrame())
         {
-            HideAndTriggerSelected();
+            HideAndTriggerSelection();
         }
     }
 
-    public void HideAndTriggerSelected()
+    public void ActivateRadialMenu()
     {
-        OnPartSelected.Invoke(currentHoveredRadialPart);
-        radialPartCanvas.gameObject.SetActive(false);
+        // Position the radial menu
+        Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
+        spawnPosition.y -= 0.1f;
+        radialPartCanvas.position = spawnPosition;
+        radialPartCanvas.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        radialPartCanvas.gameObject.SetActive(true);
+
+        // Clear previous radial parts
+        foreach (var item in spawnedParts)
+        {
+            Destroy(item);
+        }
+
+        spawnedParts.Clear();
+
+        // Create new radial parts
+        for (int i = 0; i < numberOfRadialParts; i++)
+        {
+            float angle = -i * 360 / numberOfRadialParts - angleBetweenParts / 2;
+            Vector3 radialPartEulerAngle = new Vector3(0, 0, angle);
+
+            GameObject spawnedRadialPart = Instantiate(radialPartPrefab, radialPartCanvas);
+            spawnedRadialPart.transform.position = radialPartCanvas.position;
+            spawnedRadialPart.transform.localEulerAngles = radialPartEulerAngle;
+
+            spawnedRadialPart.GetComponent<Image>().fillAmount = 1 / (float)numberOfRadialParts - (angleBetweenParts / 360);
+
+            spawnedParts.Add(spawnedRadialPart);
+        }
     }
 
     public void GetHoveredRadialPart()
     {
-        Vector3 centerToHand = handTransform.position - radialPartCanvas.position;
+        Vector3 centerToHand = leftHandTransform.position - radialPartCanvas.position;
         Vector3 centerToHandProjected = Vector3.ProjectOnPlane(centerToHand, radialPartCanvas.forward);
 
         float angle = Vector3.SignedAngle(radialPartCanvas.up, centerToHandProjected, -radialPartCanvas.forward);
@@ -73,74 +107,67 @@ public class RadialSelection : MonoBehaviour
         if (angle < 0)
             angle += 360;
 
-        //Debug.Log($"Angle: {angle}, Hovered Part: {currentHoveredRadialPart}");
-
-        
-        // Calculate the hovered part index
         currentHoveredRadialPart = (int)(angle * numberOfRadialParts / 360);
 
         for (int i = 0; i < spawnedParts.Count; i++)
         {
             if (i == currentHoveredRadialPart)
             {
-                spawnedParts[i].GetComponent<Image>().color = hoverColor; // Use the hover color
-                spawnedParts[i].transform.localScale = 1.1f * Vector3.one; // Scale up the hovered part
+                spawnedParts[i].GetComponent<Image>().color = hoverColor;
+                spawnedParts[i].transform.localScale = 1.1f * Vector3.one;
             }
             else
             {
-                spawnedParts[i].GetComponent<Image>().color = Color.white; // Default color for unhovered parts
-                spawnedParts[i].transform.localScale = Vector3.one; // Reset scale for unhovered parts
+                spawnedParts[i].GetComponent<Image>().color = Color.white;
+                spawnedParts[i].transform.localScale = Vector3.one;
             }
         }
     }
 
-    public void SpawnRadialPart()
-{
-    // Calculate the position directly in front of the camera
-    Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
-
-    // Lowers the spawn position of the radial menu
-    spawnPosition.y -= 0.1f;
-
-    // Set the radial part canvas to the calculated position
-    radialPartCanvas.position = spawnPosition;
-
-    // Set the rotation to align the canvas to the camera's forward direction
-    radialPartCanvas.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-
-    // Activate the radial menu canvas
-    radialPartCanvas.gameObject.SetActive(true);
-
-    // Clear previous radial parts
-    foreach (var item in spawnedParts)
+    public void HideAndTriggerSelection()
     {
-        Destroy(item);
+        radialPartCanvas.gameObject.SetActive(false);
+
+        // Replace the right hand with the selected object
+        ReplaceRightHand(currentHoveredRadialPart);
     }
 
-    spawnedParts.Clear();
-
-    for (int i = 0; i < numberOfRadialParts; i++)
+    private void ReplaceRightHand(int partIndex)
     {
-        float angle = -i * 360 / numberOfRadialParts - angleBetweenParts / 2;
-        Vector3 radialPartEulerAngle = new Vector3(0, 0, angle);
+        if (partIndex == rightHandOptionIndex)
+        {
+            // If the selected part is the "right hand" option, show the default hand model
+            rightHandModel.SetActive(true);
 
-        GameObject spawnedRadialPart = Instantiate(radialPartPrefab, radialPartCanvas);
-        spawnedRadialPart.transform.position = radialPartCanvas.position; // Use the canvas position
-        spawnedRadialPart.transform.localEulerAngles = radialPartEulerAngle;
+            // Destroy any replacement object if it exists
+            if (currentReplacementObject != null)
+            {
+                Destroy(currentReplacementObject);
+                currentReplacementObject = null;
+            }
+        }
+        else if (partIndex >= 0 && partIndex < handReplacementObjects.Count)
+        {
+            // If the selected part is a replacement object
+            if (currentReplacementObject != null)
+            {
+                Destroy(currentReplacementObject);
+            }
 
-        spawnedRadialPart.GetComponent<Image>().fillAmount = 1 / (float)numberOfRadialParts - (angleBetweenParts / 360);
+            // Hide the default hand model
+            rightHandModel.SetActive(false);
 
-        spawnedParts.Add(spawnedRadialPart);
+            // Instantiate the replacement object
+            currentReplacementObject = Instantiate(handReplacementObjects[partIndex], rightHandTransform);
+            currentReplacementObject.transform.localPosition = Vector3.zero;
+            currentReplacementObject.transform.localRotation = Quaternion.identity;
+        }
     }
-}
 
-
-    // Helper method to convert hex to Color
     private Color HexToColor(string hex)
     {
-        hex = hex.Replace("#", ""); // Remove the hash at the start if it's there
+        hex = hex.Replace("#", "");
 
-        // Parse the hex code
         if (hex.Length == 6)
         {
             float r = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber) / 255f;
@@ -149,7 +176,6 @@ public class RadialSelection : MonoBehaviour
             return new Color(r, g, b);
         }
 
-        // Return white if the hex code is invalid
         return Color.white;
     }
 }

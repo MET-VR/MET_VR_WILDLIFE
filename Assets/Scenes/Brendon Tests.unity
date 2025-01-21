@@ -2853,14 +2853,21 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
-  numberOfRadialParts: 4
+  numberOfRadialParts: 3
   radialPartPrefab: {fileID: 5247004805210840184, guid: 0cfae0251ed5a434dbc3f512fe0c16c4, type: 3}
   radialPartCanvas: {fileID: 1658213226}
   angleBetweenParts: 10
-  handTransform: {fileID: 1719395655}
+  leftHandTransform: {fileID: 1719395655}
+  rightHandTransform: {fileID: 1702726873}
+  rightHandModel: {fileID: 1134557620}
   OnPartSelected:
     m_PersistentCalls:
       m_Calls: []
+  handReplacementObjects:
+  - {fileID: 7848345706632882019, guid: 113edfc71fdb9fc428a28fbfabc336d5, type: 3}
+  - {fileID: 6284906383364777713, guid: 36d8ee47a3e5d1c44932942de940d3ac, type: 3}
+  - {fileID: 1134557620}
+  rightHandOptionIndex: 2
 --- !u!4 &815946533
 Transform:
   m_ObjectHideFlags: 0
@@ -7198,7 +7205,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658213227
 MonoBehaviour:
