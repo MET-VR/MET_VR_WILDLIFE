@@ -8,16 +8,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SetOptionFromUI : MonoBehaviour
 {
     public Scrollbar volumeSlider;
-    public TMPro.TMP_Dropdown turnDropdown;
-    public SetTurnTypeFromPlayerPref turnTypeFromPlayerPref;
-
+    public XROrigin xrOrigin;
     private void Start()
     {
         volumeSlider.onValueChanged.AddListener(SetGlobalVolume);
-        turnDropdown.onValueChanged.AddListener(SetTurnPlayerPref);
-
-        if (PlayerPrefs.HasKey("turn"))
-            turnDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("turn"));
+        
+        if (PlayerPrefs.HasKey("playerHeight"))
+        SetPlayerHeight(PlayerPrefs.GetFloat("playerHeight"));
     }
 
     public void SetGlobalVolume(float value)
@@ -25,14 +22,12 @@ public class SetOptionFromUI : MonoBehaviour
         AudioListener.volume = value;
     }
 
-    public void SetTurnPlayerPref(int value)
-    {
-        PlayerPrefs.SetInt("turn", value); 
-        turnTypeFromPlayerPref.ApplyPlayerPref();
-    }
-
     public void SetPlayerHeight(float value)
     {
-        
+        if(xrOrigin != null)
+        {
+            xrOrigin.CameraYOffset = value;
+            PlayerPrefs.SetFloat("playerHeight", value);
+        }
     }
 }
