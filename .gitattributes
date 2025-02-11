@@ -1,4 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 Orphan_Care_Room_With_objects_inside.fbx filter=lfs diff=lfs merge=lfs -text
+With filter=lfs diff=lfs merge=lfs -text
+objects filter=lfs diff=lfs merge=lfs -text
+inside.fbx filter=lfs diff=lfs merge=lfs -text
+Orphan filter=lfs diff=lfs merge=lfs -text
+Care filter=lfs diff=lfs merge=lfs -text
+Room filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
