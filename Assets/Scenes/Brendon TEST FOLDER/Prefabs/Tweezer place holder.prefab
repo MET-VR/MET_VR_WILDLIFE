@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3004256161296909918}
   m_Layer: 0
   m_Name: Tweezer place holder
-  m_TagString: Untagged
+  m_TagString: TweezerGrabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
