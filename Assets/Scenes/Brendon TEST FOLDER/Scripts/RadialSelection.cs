@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class RadialSelection : MonoBehaviour
 {
     public InputActionProperty spawnButton;
+    public AudioManager1 AM;
 
     [Range(2, 10)]
     public int numberOfRadialParts;
@@ -72,6 +73,7 @@ public class RadialSelection : MonoBehaviour
         radialPartCanvas.position = spawnPosition;
         radialPartCanvas.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
         radialPartCanvas.gameObject.SetActive(true);
+        AM.PlaySFX(AM.openMenu);
 
         // Clear previous radial parts
         foreach (var item in spawnedParts)
@@ -115,6 +117,8 @@ public class RadialSelection : MonoBehaviour
             {
                 spawnedParts[i].GetComponent<Image>().color = hoverColor;
                 spawnedParts[i].transform.localScale = 1.1f * Vector3.one;
+                AM.PlaySFX(AM.menuSelection);
+
             }
             else
             {
