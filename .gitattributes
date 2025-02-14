@@ -8,3 +8,4 @@ Orphan filter=lfs diff=lfs merge=lfs -text
 Care filter=lfs diff=lfs merge=lfs -text
 Room filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
+Cat[[:space:]]Food[[:space:]]and[[:space:]]Scoop.blend filter=lfs diff=lfs merge=lfs -text
