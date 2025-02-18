@@ -9,6 +9,9 @@ public class RadialSelection : MonoBehaviour
 {
     public InputActionProperty spawnButton;
     public AudioManager1 AM;
+    
+    public List<Vector3> handReplacementRotations;
+    public List<Vector3> handReplacementScales;
 
     [Range(2, 10)]
     public int numberOfRadialParts;
@@ -137,36 +140,51 @@ public class RadialSelection : MonoBehaviour
     }
 
     private void ReplaceRightHand(int partIndex)
+{
+    if (partIndex == rightHandOptionIndex)
     {
-        if (partIndex == rightHandOptionIndex)
+        rightHandModel.SetActive(true);
+        if (currentReplacementObject != null)
         {
-            // If the selected part is the "right hand" option, show the default hand model
-            rightHandModel.SetActive(true);
-
-            // Destroy any replacement object if it exists
-            if (currentReplacementObject != null)
-            {
-                Destroy(currentReplacementObject);
-                currentReplacementObject = null;
-            }
-        }
-        else if (partIndex >= 0 && partIndex < handReplacementObjects.Count)
-        {
-            // If the selected part is a replacement object
-            if (currentReplacementObject != null)
-            {
-                Destroy(currentReplacementObject);
-            }
-
-            // Hide the default hand model
-            rightHandModel.SetActive(false);
-
-            // Instantiate the replacement object
-            currentReplacementObject = Instantiate(handReplacementObjects[partIndex], rightHandTransform);
-            currentReplacementObject.transform.localPosition = Vector3.zero;
-            currentReplacementObject.transform.localRotation = Quaternion.identity;
+            Destroy(currentReplacementObject);
+            currentReplacementObject = null;
         }
     }
+    else if (partIndex >= 0 && partIndex < handReplacementObjects.Count)
+    {
+        if (currentReplacementObject != null)
+        {
+            Destroy(currentReplacementObject);
+        }
+
+        rightHandModel.SetActive(false);
+
+        // Instantiate the new hand replacement object
+        currentReplacementObject = Instantiate(handReplacementObjects[partIndex], rightHandTransform);
+        currentReplacementObject.transform.localPosition = Vector3.zero;
+
+        // **Apply Rotation (if index exists)**
+        if (partIndex < handReplacementRotations.Count)
+        {
+            currentReplacementObject.transform.localRotation = Quaternion.Euler(handReplacementRotations[partIndex]);
+        }
+        else
+        {
+            currentReplacementObject.transform.localRotation = Quaternion.identity; // Default rotation
+        }
+
+        // **Apply Scale (if index exists)**
+        if (partIndex < handReplacementScales.Count)
+        {
+            currentReplacementObject.transform.localScale = handReplacementScales[partIndex];
+        }
+        else
+        {
+            currentReplacementObject.transform.localScale = Vector3.one; // Default scale
+        }
+    }
+}
+
 
     private Color HexToColor(string hex)
     {
