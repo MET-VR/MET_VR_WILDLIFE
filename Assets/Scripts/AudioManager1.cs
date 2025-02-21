@@ -4,41 +4,52 @@ using UnityEngine;
 
 public class AudioManager1 : MonoBehaviour
 {
-   [Header("----------- Audio Source -----------")]
-   [SerializeField] AudioSource musicSource;
-   [SerializeField] AudioSource SFXSource;
+    public static AudioManager1 Instance; // Singleton Instance
 
-   [Header("----------- Audio Clip -----------")]
-   public AudioClip background;
+    [Header("----------- Audio Source -----------")]
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource SFXSource;
 
-   public AudioClip mockingbirdNormal;
-   public AudioClip mockingbirdDistressed;
+    [Header("----------- Audio Clip -----------")]
+    public AudioClip background;
 
-   public AudioClip fileCabinetHandle;
-   public AudioClip fileCabinetOpen;
+    public AudioClip mockingbirdNormal1;
+    public AudioClip mockingbirdNormal2;
+    public AudioClip mockingbirdHappy1;
+    public AudioClip mockingbirdHappy2;
+    public AudioClip mockingbirdDistressed;
 
-   public AudioClip CabinetHandle;
-   public AudioClip CabinetOpen;
+    public AudioClip fileCabinetHandle;
+    public AudioClip fileCabinetOpen;
 
-   public AudioClip filePickUp1;
-   public AudioClip filePickUp2;
-   public AudioClip filePickUp3;
+    public AudioClip CabinetHandle;
+    public AudioClip CabinetOpen;
 
-   public AudioClip objectPickUp;
+    public AudioClip filePickUp1;
+    public AudioClip filePickUp2;
+    public AudioClip filePickUp3;
 
-   public AudioClip openMenu;
-   public AudioClip menuSelection;
+    public AudioClip objectPickUp;
 
-   private void Start()
-   {
-    musicSource.clip = background;
-    musicSource.loop = true;
-    musicSource.Play();
-    musicSource.volume = 10;
-    
-   }
-   public void PlaySFX(AudioClip clip)
-   {
-      SFXSource.PlayOneShot(clip);
-   }
+    public AudioClip openMenu;
+    public AudioClip menuSelection;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        musicSource.clip = background;
+        musicSource.loop = true;
+        musicSource.Play();
+        musicSource.volume = 10;
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        SFXSource.PlayOneShot(clip);
+    }
 }
