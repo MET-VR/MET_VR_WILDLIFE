@@ -122,6 +122,7 @@ public class RadialSelection : MonoBehaviour
             {
                 spawnedParts[i].GetComponent<Image>().color = hoverColor;
                 spawnedParts[i].transform.localScale = 1.1f * Vector3.one;
+                //Play sound effect
                 AM.PlaySFX(AM.menuSelection);
 
             }
