@@ -116,6 +116,8 @@ public class RadialSelection : MonoBehaviour
 
         for (int i = 0; i < spawnedParts.Count; i++)
         {
+
+
             if (i == currentHoveredRadialPart)
             {
                 spawnedParts[i].GetComponent<Image>().color = hoverColor;
