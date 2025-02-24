@@ -13,7 +13,7 @@ public class BirdFeedingHeartEffect : MonoBehaviour
     public GameObject heartPrefab; // Heart image prefab
     public Transform effectSpawnPoint; // Where the effect appears
     public int numberOfHearts = 10; // How many hearts to spawn
-    public float heartLifetime = 2f; // How long hearts last
+    public float heartLifetime = 3f; // How long hearts last
 
     private void OnTriggerEnter(Collider other)
     {
