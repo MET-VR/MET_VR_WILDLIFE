@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +13,7 @@ public class RadialSelection : MonoBehaviour
     public List<Vector3> handReplacementScales;
 
     [Range(2, 10)]
-    public int numberOfRadialParts;
+    public int numberOfRadialParts = 4; // A default value to avoid uninitialized
     public GameObject radialPartPrefab;
     public Transform radialPartCanvas;
     public float angleBetweenParts = 10;
@@ -44,11 +43,11 @@ public class RadialSelection : MonoBehaviour
     public GameObject tweezers; // Original tweezer model
     public GameObject tweezersWithFood; // Tweezer model with food
 
-    void OnEnable() => spawnButton.action.Enable();
-    void OnDisable() => spawnButton.action.Disable();
-    void Start() => hoverColor = HexToColor(hoverColorHex);
+    private void OnEnable() => spawnButton.action.Enable();
+    private void OnDisable() => spawnButton.action.Disable();
+    private void Start() => hoverColor = HexToColor(hoverColorHex);
 
-    void Update()
+    private void Update()
     {
         if (spawnButton.action.WasPressedThisFrame()) ActivateRadialMenu();
         if (spawnButton.action.IsPressed()) GetHoveredRadialPart();
@@ -64,8 +63,7 @@ public class RadialSelection : MonoBehaviour
         radialPartCanvas.gameObject.SetActive(true);
         AM.PlaySFX(AM.openMenu);
 
-        foreach (var item in spawnedParts) Destroy(item);
-        spawnedParts.Clear();
+        ClearSpawnedParts();
 
         for (int i = 0; i < numberOfRadialParts; i++)
         {
@@ -75,10 +73,16 @@ public class RadialSelection : MonoBehaviour
             GameObject spawnedRadialPart = Instantiate(radialPartPrefab, radialPartCanvas);
             spawnedRadialPart.transform.position = radialPartCanvas.position;
             spawnedRadialPart.transform.localEulerAngles = radialPartEulerAngle;
-            spawnedRadialPart.GetComponent<Image>().fillAmount = 1 / (float)numberOfRadialParts - (angleBetweenParts / 360);
+            spawnedRadialPart.GetComponent<Image>().fillAmount = 1f / (numberOfRadialParts + angleBetweenParts / 360); // Adjust fill amount properly
 
             spawnedParts.Add(spawnedRadialPart);
         }
+    }
+
+    private void ClearSpawnedParts()
+    {
+        foreach (var item in spawnedParts) Destroy(item);
+        spawnedParts.Clear();
     }
 
     public void GetHoveredRadialPart()
@@ -93,7 +97,8 @@ public class RadialSelection : MonoBehaviour
 
         for (int i = 0; i < spawnedParts.Count; i++)
         {
-            spawnedParts[i].GetComponent<Image>().color = (i == currentHoveredRadialPart) ? hoverColor : Color.white;
+            var image = spawnedParts[i].GetComponent<Image>();
+            image.color = (i == currentHoveredRadialPart) ? hoverColor : Color.white;
             spawnedParts[i].transform.localScale = (i == currentHoveredRadialPart) ? 1.1f * Vector3.one : Vector3.one;
             if (i == currentHoveredRadialPart) AM.PlaySFX(AM.menuSelection);
         }
@@ -110,15 +115,11 @@ public class RadialSelection : MonoBehaviour
         if (partIndex == rightHandOptionIndex)
         {
             rightHandModel.SetActive(true);
-            if (currentReplacementObject != null)
-            {
-                Destroy(currentReplacementObject);
-                currentReplacementObject = null;
-            }
+            DestroyCurrentReplacementObject();
         }
         else if (partIndex >= 0 && partIndex < handReplacementObjects.Count)
         {
-            if (currentReplacementObject != null) Destroy(currentReplacementObject);
+            DestroyCurrentReplacementObject();
             rightHandModel.SetActive(false);
 
             currentReplacementObject = Instantiate(handReplacementObjects[partIndex], rightHandTransform);
@@ -142,6 +143,15 @@ public class RadialSelection : MonoBehaviour
         }
     }
 
+    private void DestroyCurrentReplacementObject()
+    {
+        if (currentReplacementObject != null)
+        {
+            Destroy(currentReplacementObject);
+            currentReplacementObject = null;
+        }
+    }
+
     public void ReplaceTweezerWithFood()
     {
         // Disable the original tweezer and enable the tweezers with food
@@ -151,7 +161,7 @@ public class RadialSelection : MonoBehaviour
 
     public void ReplaceTweezerWithSecondary(GameObject newModel)
     {
-        if (currentReplacementObject) Destroy(currentReplacementObject);
+        DestroyCurrentReplacementObject();
         currentReplacementObject = Instantiate(newModel, rightHandTransform);
         currentReplacementObject.transform.localPosition = Vector3.zero;
         isSecondaryObjectActive = true;
