@@ -1100,7 +1100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364176456}
   m_Layer: 0
-  m_Name: FloorShelves?
+  m_Name: FloorShelves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4115,7 +4115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297537072}
   m_Layer: 0
-  m_Name: RoofShelves?
+  m_Name: RoofShelves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4999,7 +4999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1579165277}
   m_Layer: 0
-  m_Name: ControlBoxObjects?
+  m_Name: BrooderObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
