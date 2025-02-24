@@ -8,6 +8,7 @@ TagManager:
   - HandGrabbable
   - SyringeGrabbable
   - TweezerGrabbable
+  - Food
   layers:
   - Default
   - TransparentFX

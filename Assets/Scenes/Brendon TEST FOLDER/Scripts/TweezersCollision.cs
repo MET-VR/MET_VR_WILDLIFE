@@ -22,7 +22,7 @@ public class TweezerCollision : MonoBehaviour
             radialSelection.ResetToTweezer();
         }
         // If the collided object is tagged as "Food", replace with food tweezer
-        else if (other.CompareTag("Food"))
+        if (other.CompareTag("Food"))
         {
             // Replace the tweezer with the tweezer that has food in it
             radialSelection.ReplaceTweezerWithFood();
