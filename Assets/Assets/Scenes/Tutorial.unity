@@ -14481,7 +14481,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1572475815}
-  - component: {fileID: 1572475816}
   m_Layer: 0
   m_Name: Chair (1)
   m_TagString: Untagged
@@ -14509,27 +14508,6 @@ Transform:
   m_Father: {fileID: 602773065862963895}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1572475816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572475814}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1597398474
 GameObject:
   m_ObjectHideFlags: 0
@@ -27566,7 +27544,6 @@ GameObject:
   - component: {fileID: 5255811066322407627}
   - component: {fileID: 5198064881643276264}
   - component: {fileID: 9204756509928207649}
-  - component: {fileID: 9204756509928207650}
   m_Layer: 0
   m_Name: Sphere.001
   m_TagString: Untagged
@@ -30608,7 +30585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3652805144657350014}
   m_LocalRotation: {x: -0.7070759, y: -0.0066091833, z: 0.006609181, w: 0.7070759}
-  m_LocalPosition: {x: 6.166877, y: 13.479692, z: -60.476948}
+  m_LocalPosition: {x: 6.197, y: 13.479692, z: -60.191}
   m_LocalScale: {x: 67.79989, y: 67.792046, z: 15.24922}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38497,27 +38474,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9204756509928207650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652805144657350014}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.019871885, y: 0.019871892, z: 0.009975766}
-  m_Center: {x: -0.00000001816079, y: -0.000000027473957, z: -0.0049879127}
 --- !u!4 &9205617815081629250
 Transform:
   m_ObjectHideFlags: 0
