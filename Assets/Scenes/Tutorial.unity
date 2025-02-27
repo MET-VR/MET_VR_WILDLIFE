@@ -5064,7 +5064,7 @@ MonoBehaviour:
   m_UIScroll: {fileID: 2464016903823916871, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_SmoothMotionEnabled: 1
   m_SmoothTurnEnabled: 0
-  m_NearFarEnableTeleportDuringNearInteraction: 1
+  m_NearFarEnableTeleportDuringNearInteraction: 0
   m_UIScrollingEnabled: 1
   m_RayInteractorChanged:
     m_PersistentCalls:
@@ -6730,6 +6730,9 @@ MonoBehaviour:
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
+  AM: {fileID: 0}
+  handReplacementRotations: []
+  handReplacementScales: []
   numberOfRadialParts: 3
   radialPartPrefab: {fileID: 5247004805210840184, guid: 0cfae0251ed5a434dbc3f512fe0c16c4, type: 3}
   radialPartCanvas: {fileID: 470700036}
@@ -14232,7 +14235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7408adb03f71045a57a35e72a837f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cameraoffset: {fileID: 1544540248}
+  cameraOffset: {fileID: 0}
+  heightText: {fileID: 0}
+  increaseButton: {fileID: 0}
+  decreaseButton: {fileID: 0}
   heightAmount: 0.1
 --- !u!1 &1545620443
 GameObject:
@@ -17517,7 +17523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7408adb03f71045a57a35e72a837f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cameraoffset: {fileID: 1544540248}
+  cameraOffset: {fileID: 0}
+  heightText: {fileID: 0}
+  increaseButton: {fileID: 0}
+  decreaseButton: {fileID: 0}
   heightAmount: 0.1
 --- !u!114 &1864492763
 MonoBehaviour:
@@ -33264,7 +33273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7408adb03f71045a57a35e72a837f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cameraoffset: {fileID: 0}
+  cameraOffset: {fileID: 0}
+  heightText: {fileID: 0}
+  increaseButton: {fileID: 0}
+  decreaseButton: {fileID: 0}
   heightAmount: 0
 --- !u!4 &6528530117614878765
 Transform:

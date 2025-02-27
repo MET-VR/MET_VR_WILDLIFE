@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
-using static OVRPlugin;
+
 
 public class GameMangaer : MonoBehaviour
 {
