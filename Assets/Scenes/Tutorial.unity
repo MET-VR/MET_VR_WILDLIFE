@@ -1015,12 +1015,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'On your left controller move your thumb along the big button on the center
+  m_text: 'On your right controller move your thumb along the big button on the center
     of your controller in the direction you want to look in
 
 
     Note: Its similar
-    to moving but with the left controller'
+    to moving but with the right controller'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10422,7 +10422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'On your right controller move your thumb along the big button on the center
+  m_text: 'On your left controller move your thumb along the big button on the center
     of your controller in the direction you want to move in
 
 
@@ -12115,7 +12115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1326537967
 Transform:
   m_ObjectHideFlags: 0
@@ -12191,8 +12191,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Put your hand over the object you want  to pick up then hold the button
-    at the back of the controller to pick up the object. Then release the button
-    to let go of the object.
+    at the back of the controller to pick up the object. Release the button to let
+    go of the object.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12284,7 +12284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1351000549
 Transform:
   m_ObjectHideFlags: 0
@@ -12842,7 +12842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1402840436
 Transform:
   m_ObjectHideFlags: 0
