@@ -1461,21 +1461,6 @@ Transform:
   m_Father: {fileID: 1870601232}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &239977995
-Transform:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 8796854835293459481, guid: 8355b528b20a2394e98d93677ab03898, type: 3}
-  m_PrefabInstance: {fileID: 2092457174}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147334314}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.11, y: 16.855, z: -39.05}
-  m_LocalScale: {x: 0.684215, y: 0.684215, z: 0.684215}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 543450652969807498}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265706862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,7 +2849,7 @@ MonoBehaviour:
   - {fileID: 3284981574402953775, guid: 3c3436f5b72358f4289f7eb2c917e6ec, type: 3}
   - {fileID: 2070132706191029519, guid: 36fd2115c81362f4d8d91971768ac47e, type: 3}
   secondaryObjects:
-  - {fileID: 1147334314}
+  - {fileID: 0}
   resetTriggers:
   - {fileID: 768713743}
   rightHandOptionIndex: -1
@@ -4955,22 +4940,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113679172}
   m_Mesh: {fileID: -4056774169934894650, guid: a2f4b008dbe560c4c9be09666af3a17a, type: 3}
---- !u!1 &1147334314
-GameObject:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 8169358689676316323, guid: 8355b528b20a2394e98d93677ab03898, type: 3}
-  m_PrefabInstance: {fileID: 2092457174}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 239977995}
-  m_Layer: 0
-  m_Name: 'Cat Food (Missing Prefab with guid: 8355b528b20a2394e98d93677ab03898)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1159364511
 GameObject:
   m_ObjectHideFlags: 0
@@ -6069,7 +6038,7 @@ MonoBehaviour:
   requiredItemTag: Food
   itemHolder: {fileID: 0}
   birdAnimator: {fileID: 0}
-  feedingSound: {fileID: 0}
+  feedingSound: {fileID: 8300000, guid: dc88a72c429b54643be07d634af70cd0, type: 3}
   heartPrefab: {fileID: 4162680626354309528, guid: 3902ea83e7a35ff449375475e1d4c360, type: 3}
   effectSpawnPoint: {fileID: 1447733578}
   numberOfHearts: 10
@@ -7301,43 +7270,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!1 &1749300842
-GameObject:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 671765788133667351, guid: 8355b528b20a2394e98d93677ab03898, type: 3}
-  m_PrefabInstance: {fileID: 2092457174}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1749300846}
-  m_Layer: 0
-  m_Name: Placeholder for referenced GameObject in Prefab instance (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1749300846
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749300842}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.1909282, y: 2.1558497, z: 0.5746155}
-  m_Center: {x: 0.00058770174, y: 0.0010267493, z: 0.80435467}
 --- !u!1 &1778576083
 GameObject:
   m_ObjectHideFlags: 0
@@ -9576,7 +9508,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 671765788133667351, guid: 8355b528b20a2394e98d93677ab03898, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1749300846}
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8355b528b20a2394e98d93677ab03898, type: 3}
 --- !u!1 &2093250155
 GameObject:
@@ -10504,7 +10436,6 @@ Transform:
   - {fileID: 541792825}
   - {fileID: 2139541843}
   - {fileID: 1302499966}
-  - {fileID: 239977995}
   - {fileID: 911123260}
   - {fileID: 1579165277}
   - {fileID: 4993520869851088207}
