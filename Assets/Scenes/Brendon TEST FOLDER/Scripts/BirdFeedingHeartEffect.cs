@@ -15,6 +15,14 @@ public class BirdFeedingHeartEffect : MonoBehaviour
     public int numberOfHearts = 10; // How many hearts to spawn
     public float heartLifetime = 3f; // How long hearts last
 
+    private BirdRandomNormalSoundPlayer soundPlayer; // Reference to random sound player
+
+    private void Start()
+    {
+        // Get the BirdRandomNormalSoundPlayer script if it's on the same GameObject
+        soundPlayer = GetComponent<BirdRandomNormalSoundPlayer>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if player is holding the correct item
@@ -26,13 +34,19 @@ public class BirdFeedingHeartEffect : MonoBehaviour
 
     void FeedBird(GameObject foodItem)
     {
+        // Stop random bird sounds
+        if (soundPlayer != null)
+        {
+            soundPlayer.SetFeedingState(true);
+        }
+
         // Play animation
         if (birdAnimator != null)
         {
             birdAnimator.SetTrigger("Eat");
         }
 
-        // Play sound effect
+        // Play feeding sound
         if (AudioManager1.Instance != null && feedingSound != null)
         {
             AudioManager1.Instance.PlaySFX(feedingSound);
@@ -44,6 +58,18 @@ public class BirdFeedingHeartEffect : MonoBehaviour
         // Change player's held item (for now, we just destroy it and spawn a new one)
         Destroy(foodItem);
         GiveNewItem();
+
+        // Resume random bird sounds after feeding delay
+        StartCoroutine(ResumeRandomSounds());
+    }
+
+    IEnumerator ResumeRandomSounds()
+    {
+        yield return new WaitForSeconds(2.0f); // Wait for feeding sound to finish
+        if (soundPlayer != null)
+        {
+            soundPlayer.SetFeedingState(false);
+        }
     }
 
     void SpawnHearts()
@@ -52,8 +78,30 @@ public class BirdFeedingHeartEffect : MonoBehaviour
         {
             Vector3 randomOffset = new Vector3(Random.Range(-2f, 2f), Random.Range(0.5f, 1.5f), Random.Range(-2f, 2f));
             GameObject heart = Instantiate(heartPrefab, effectSpawnPoint.position + randomOffset, Quaternion.identity);
-            Destroy(heart, heartLifetime); // Destroy the heart after it fades out
+
+            // Make hearts face the camera
+            heart.transform.LookAt(Camera.main.transform);
+            heart.transform.Rotate(0, 180, 0); // Adjust rotation if needed
+
+            // Make hearts float upwards
+            StartCoroutine(FloatAndDestroy(heart));
         }
+    }
+
+    IEnumerator FloatAndDestroy(GameObject heart)
+    {
+        float elapsedTime = 0;
+        Vector3 startPos = heart.transform.position;
+        Vector3 endPos = startPos + new Vector3(0, 1.5f, 0); // Move up
+
+        while (elapsedTime < heartLifetime)
+        {
+            heart.transform.position = Vector3.Lerp(startPos, endPos, elapsedTime / heartLifetime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(heart);
     }
 
     void GiveNewItem()
